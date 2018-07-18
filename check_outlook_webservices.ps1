@@ -60,6 +60,8 @@ param(
     [switch] $Verbose
 )
 
+$TrustAnySSLCertificate = $true
+
 . "$PSScriptRoot\nagios-utils.ps1"
 
 try {
@@ -93,8 +95,6 @@ if (-not $Mailbox -and -not $Password -and $(Test-Path $CredentialPath)) {
 # Run the test
 $state = @{}
 $performance = @{}
-
-# Test-OutlookConnectivity -ProbeIdentity "OutlookRpcSelfTestProbe" -MailboxId $cred.UserName -Credential $cred
 
 try {
     $tests = Test-OutlookWebServices `        -Identity $credential.UserName `        -ClientAccessServer $ClientAccessServer `        -MailboxCredential $credential `
