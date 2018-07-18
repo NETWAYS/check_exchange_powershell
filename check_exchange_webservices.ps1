@@ -1,7 +1,7 @@
 ﻿<#
 .NAME
 
-check_outlook_webservices
+check_exchange_webservices
 
 .SYNOPSIS
 
@@ -9,7 +9,7 @@ Checks the availablitity of EWS
 
 .SYNTAX
 
-check_outlook_webservices.ps1 -Server exchange01
+check_exchange_webservices.ps1 -Server exchange01
 
 .PARAMETER ClientAccessServer
 
