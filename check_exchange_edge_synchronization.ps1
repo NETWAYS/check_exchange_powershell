@@ -1,11 +1,11 @@
 ﻿<#
 .NAME
 
-check_exchange_queues
+check_exchange_edge_synchronization
 
 .SYNOPSIS
 
-Checks the status of Exchange MailQueues
+Checks the status of Exchange Edge Synchronization
 
 .SYNTAX
 

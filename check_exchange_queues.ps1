@@ -31,13 +31,13 @@ Maximum allowed deferred messages in queue before going to critical state
 
 Maximum allowed deferred messages in queue before going to warning state
 
-.PARAMETER MaxDeferredCritical
+.PARAMETER MaxLockedCritical
 
-Maximum allowed deferred messages in queue before going to critical state
+Maximum allowed locked messages in queue before going to critical state
 
-.PARAMETER MaxDeferredWarn
+.PARAMETER MaxLockedWarn
 
-Maximum allowed deferred messages in queue before going to warning state
+Maximum allowed locked messages in queue before going to warning state
 
 #>
 
