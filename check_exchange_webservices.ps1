@@ -54,13 +54,11 @@ param(
     [string] $Mailbox,
     [securestring] $Password,
     [string] $CredentialPath = "$PSScriptRoot\MailboxCredential.xml",
-    [int]    $MaxWarn = 100,
-    [int]    $MaxCrit = 200,
+    [int]    $MaxWarn = 500,
+    [int]    $MaxCrit = 1000,
     [switch] $TrustAnySSLCertificate,
     [switch] $Verbose
 )
-
-$TrustAnySSLCertificate = $true
 
 . "$PSScriptRoot\nagios-utils.ps1"
 
