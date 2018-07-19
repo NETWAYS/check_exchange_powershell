@@ -23,7 +23,7 @@ function Perfdata-Label ([string] $name) {
 }
 
 function Plugin-Output ([int] $code, [string] $output) {
-    if ($code > $NagiosUnknown) { $code = $NagiosUnknown }
+    if ($code -gt $NagiosUnknown) { $code = $NagiosUnknown }
     $state = Plugin-State-Text $code
     
     Write-Host "${state}: $output"
