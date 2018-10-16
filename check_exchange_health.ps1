@@ -19,6 +19,7 @@ Exchange Server to check against (Default: $env:COMPUTERNAME)
 
 param(
     [string] $Server = $env:COMPUTERNAME,
+    [boolean] $IgnoreDisabled = $true
     [switch] $Verbose
 )
 
@@ -34,7 +35,11 @@ $state = @{}
 $performance = @{}
 
 try {
-    $objects = Get-ServerHealth -Identity $Server
+    if ($IgnoreDisabled -eq $true) {
+      $objects = Get-ServerHealth -Identity $Server | ? alertvalue -ne disabled
+    } else {
+      $objects = Get-ServerHealth -Identity $Server
+    }
 } catch {
     Plugin-Exit $NagiosUnknown "Get-ServerHealth failed: $error"
 }
