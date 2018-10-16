@@ -15,11 +15,14 @@ check_exchange_health.ps1 -Server exchange01
 
 Exchange Server to check against (Default: $env:COMPUTERNAME)
 
+. PARAMETER IgnoreDisabled
+
+Ignore Disabled monitors and don't mark them as Critical (DEFAULT: $true)
 #>
 
 param(
     [string] $Server = $env:COMPUTERNAME,
-    [boolean] $IgnoreDisabled = $true
+    [boolean] $IgnoreDisabled = $true,
     [switch] $Verbose
 )
 
