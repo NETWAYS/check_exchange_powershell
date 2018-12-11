@@ -23,7 +23,7 @@ Ignore Disabled monitors and don't mark them as Critical (DEFAULT: $true)
 param(
     [string] $Server = $env:COMPUTERNAME,
     [boolean] $IgnoreDisabled = $true,
-    [string[]] $Scenarios,
+    [string[]] $Scenarios = @{},
     [switch] $Verbose
 )
 
@@ -39,8 +39,8 @@ $state = @{}
 $performance = @{}
 
 try {
-    if ($Scenarios) {
-      $objects = Get-ServerHealth -Identity $Server | Where-Object { $_.Name -notin $Scenarios }
+    if ($Scenarios.count -gt 0 -and $IgnoreDisabled -eq $true) {
+      $objects = Get-ServerHealth -Identity $Server | Where-Object { $_.Name -notin $Scenarios } | ? alertvalue -ne disabled
     } elseif ($IgnoreDisabled -eq $true) {
       $objects = Get-ServerHealth -Identity $Server | ? alertvalue -ne disabled
     } else {
