@@ -18,12 +18,18 @@ Exchange Server to check against (Default: $env:COMPUTERNAME)
 . PARAMETER IgnoreDisabled
 
 Ignore Disabled monitors and don't mark them as Critical (DEFAULT: $true)
+
+. PARAMETER IgnoreScenarios
+
+Ignore a list of scenarios and don't mark them as critical (DEFAULT: empty)
+Example: "Messages.failed.to.be.made.redundant.Monitor","OnPremisesSmtpClientSubmissionMonitor"
+
 #>
 
 param(
     [string] $Server = $env:COMPUTERNAME,
     [boolean] $IgnoreDisabled = $true,
-    [string[]] $Scenarios = @{},
+    [string[]] $IgnoreScenarios = @{},
     [switch] $Verbose
 )
 
@@ -39,8 +45,8 @@ $state = @{}
 $performance = @{}
 
 try {
-    if ($Scenarios.count -gt 0 -and $IgnoreDisabled -eq $true) {
-      $objects = Get-ServerHealth -Identity $Server | Where-Object { $_.Name -notin $Scenarios } | ? alertvalue -ne disabled
+    if ($IgnoreScenarios.count -gt 0 -and $IgnoreDisabled -eq $true) {
+      $objects = Get-ServerHealth -Identity $Server | Where-Object { $_.Name -notin $IgnoreScenarios } | ? alertvalue -ne disabled
     } elseif ($IgnoreDisabled -eq $true) {
       $objects = Get-ServerHealth -Identity $Server | ? alertvalue -ne disabled
     } else {
