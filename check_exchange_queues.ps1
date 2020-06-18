@@ -132,6 +132,13 @@ try {
         } else {
             $item.State = $NagiosOk
         }
+        
+        $nextHopDomain = $object.NextHopDomain
+        if ($nextHopDomain.StartsWith("site:")) {
+            $item.Infos += "To: " + $nextHopDomain.split(";")[0]
+        } else {
+            $item.Infos += "To: " + $nextHopDomain
+        }
     }
 
     $longOutput = @()
