@@ -84,6 +84,8 @@ try {
             Infos = @()
             State = $NagiosUnknown
         }
+        
+        $item.Infos += $object.NextHopDomain
 
         if ($object.Status -ne 'Active' -and $object.Status -ne 'Ready') {
             $item.Criticals += "inactive"
