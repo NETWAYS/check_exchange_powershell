@@ -84,8 +84,6 @@ try {
             Infos = @()
             State = $NagiosUnknown
         }
-        
-        $item.Infos += $object.NextHopDomain
 
         if ($object.Status -ne 'Active' -and $object.Status -ne 'Ready') {
             $item.Criticals += "inactive"
@@ -133,6 +131,13 @@ try {
             $item.State = $NagiosWarning
         } else {
             $item.State = $NagiosOk
+        }
+        
+        $nextHopDomain = $object.NextHopDomain
+        if ($nextHopDomain.StartsWith("site:")) {
+            $item.Infos += "To: " + $nextHopDomain.split(";")[0]
+        } else {
+            $item.Infos += "To: " + $nextHopDomain
         }
     }
 
