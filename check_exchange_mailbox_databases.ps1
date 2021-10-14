@@ -87,6 +87,7 @@ try {
         $performance[$id] = @{
             database_size = $database.DatabaseSize.ToMB().ToString() + "MB;;;0"
             available_space = $database.AvailableNewMailboxSpace.ToMB().ToString() + "MB;;;0"
+            used_space = ($database.DatabaseSize - $database.AvailableNewMailboxSpace).ToMB().ToString() + "MB;;;0"
         }
 
         if ($db.Criticals -gt 0) {
