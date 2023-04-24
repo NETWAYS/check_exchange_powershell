@@ -8,6 +8,17 @@ Icinga 2 with the agent running on the Exchange Windows Servers.
 
 For `CheckCommand` definitions see [icinga2-commands.conf](icinga2-commands.conf).
 
+## Credentials
+
+```
+Get-Credential | Export-CliXml ".\MailboxCredential.xml"
+
+# Needs to be stored in:
+# $PSScriptRoot\MailboxCredential.xml
+
+# Can be adjusted with the parameter 'CredentialPath'
+```
+
 ### check_exchange_health
 
 Checks the server health of Microsoft Exchange by calling `Get-ServerHealth`
