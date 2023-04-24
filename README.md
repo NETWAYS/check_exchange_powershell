@@ -8,6 +8,17 @@ Icinga 2 with the agent running on the Exchange Windows Servers.
 
 For `CheckCommand` definitions see [icinga2-commands.conf](icinga2-commands.conf).
 
+## Credentials
+
+```
+Get-Credential | Export-CliXml ".\MailboxCredential.xml"
+
+# Needs to be stored in:
+# $PSScriptRoot\MailboxCredential.xml
+
+# Can be adjusted with the parameter 'CredentialPath'
+```
+
 ### check_exchange_health
 
 Checks the server health of Microsoft Exchange by calling `Get-ServerHealth`
@@ -74,6 +85,18 @@ OK: All 2 Edge Synchronizations are fine
 [OK] EX02: Normal, sync 1 minutes old
 | 'EX01::sync_age'=28s;300;600;0 'EX02::sync_age'=28s;300;600;0
 ```
+
+## Known Issues
+
+### Import-Clixml
+
+```
+Command: Get-Credential | Export-CliXml .\MailboxCredential.xml
+->
+Import-Clixml : Key not valid for use in specified state
+```
+
+Solution: Needs to run as user "SYSTEM" (Example: via `PsExec`).
 
 ## Contributing
 
