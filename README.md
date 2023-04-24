@@ -75,6 +75,18 @@ OK: All 2 Edge Synchronizations are fine
 | 'EX01::sync_age'=28s;300;600;0 'EX02::sync_age'=28s;300;600;0
 ```
 
+## Known Issues
+
+### Import-Clixml
+
+```
+Command: Get-Credential | Export-CliXml .\MailboxCredential.xml
+->
+Import-Clixml : Key not valid for use in specified state
+```
+
+Solution: Needs to run as user "SYSTEM" (Example: via `PsExec`).
+
 ## Contributing
 
 Feel free to ask questions and open issues. Feedback is always welcome and appreciated.
